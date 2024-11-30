@@ -1,0 +1,89 @@
+{% extends "todo/base.html" %}
+
+{% block extra_css %}
+<style>
+    .logout-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        background-color: #f8f9fa;
+    }
+
+    .logout-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .logout-icon {
+        font-size: 3rem;
+        color: #dc3545;
+        margin-bottom: 1rem;
+    }
+
+    .logout-title {
+        color: #343a40;
+        margin-bottom: 1rem;
+    }
+
+    .logout-message {
+        color: #6c757d;
+        margin-bottom: 2rem;
+    }
+
+    .btn-logout {
+        background-color: #dc3545;
+        border: none;
+        padding: 10px 30px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-logout:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+        background-color: #6c757d;
+        border: none;
+        padding: 10px 30px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="logout-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="logout-card">
+                    <div class="logout-icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <h2 class="logout-title">Sign Out</h2>
+                    <p class="logout-message">Are you sure you want to sign out?</p>
+                    
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-logout">Sign Out</button>
+                            <a href="{% url 'todo_list' %}" class="btn btn-cancel">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

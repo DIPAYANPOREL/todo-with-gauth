@@ -1,0 +1,116 @@
+<!-- login.html -->
+{% extends "todo/base.html" %}
+{% load socialaccount %}
+
+{% block extra_css %}
+<style>
+    .login-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        background-color: #f8f9fa;
+    }
+
+    .login-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .login-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-header {
+        background: #007bff;
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+        padding: 20px;
+    }
+
+    .google-btn {
+        background-color: #fff;
+        color: #757575;
+        border: 1px solid #ddd;
+        padding: 12px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .google-btn:hover {
+        background-color: #f1f1f1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .google-icon {
+        margin-right: 10px;
+        width: 20px;
+    }
+
+    .signup-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .signup-link:hover {
+        text-decoration: underline;
+    }
+
+    .welcome-text {
+        color: #6c757d;
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="login-card">
+                    <div class="card-header text-center">
+                        <h2 class="mb-0">Welcome Back!</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="welcome-text text-center">
+                            Sign in to manage your todos efficiently
+                        </p>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <div class="d-grid gap-3">
+                            <a href="{% provider_login_url 'google' next='/todo_list/' %}" class="google-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" 
+                                     alt="Google Logo" 
+                                     class="google-icon">
+                                Sign in with Google
+                            </a>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <p class="mb-0">Don't have an account? 
+                                <a href="{% url 'account_signup' %}" class="signup-link">Sign Up</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
