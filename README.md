@@ -23,6 +23,9 @@ code => python3 manage.py migrate
 7. To deactivate the virtual environment we have to run the below command
 code => deactivate
 
-7. ALdo we have to go to the setting and then change the database's user and password what you have given. 
+7. Also we have to go to the setting and then change the database's user and password what you have given. 
 
 8. The api keys of google is hidden so maybe there are some issue related that.
+
+9. To create a super user run the below command and provide details accordingly
+code => python manage.py createsuperuser
